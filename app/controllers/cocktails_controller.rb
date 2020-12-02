@@ -21,7 +21,7 @@ class CocktailsController < ApplicationController
     @cocktail = Cocktail.new(cocktail_params)
 
     if @cocktail.save
-      redirect_to @cocktail, notice: 'Cocktail was successfully created.'
+      redirect_to cocktail_path(@cocktail), notice: 'Cocktail created.'
     else
       render :new
     end
@@ -36,6 +36,6 @@ class CocktailsController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def cocktail_params
-    params.require(:cocktail).permit(:name)
+    params.require(:cocktail).permit(:name, :photo)
   end
 end

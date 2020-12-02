@@ -4,10 +4,17 @@
   <strong>Name:</strong>
   <%= @cocktail.name %>
 </p>
+<% if @cocktail.photo.attached? %>
+  <%= cl_image_tag @cocktail.photo.key, height: 300, width: 400, crop: :fill %>
+<% end %>
 
 <% @cocktail.doses.each do |dose| %>
   <p>
     <%= "#{dose.description} - #{dose.ingredient.name}" %>
+    <small><%= link_to 'delete', 
+               cocktail_dose_path(@cocktail.id, dose.id), 
+               method: :delete,
+               data: { confirm: "Are you sure?" } %></small>
     <hr>
   </p>
 <% end %>
